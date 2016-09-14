@@ -47,6 +47,7 @@
 /** Reloads and re-lays out all the pages */
 - (void)reloadData;
 
+- (UIViewController * __nullable)dequeuedViewController;
 
 /** Reloads and re-layouts the pages at the given indexes
  * @param indexes the indexes of the pages that should be reloaded

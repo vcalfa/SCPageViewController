@@ -39,6 +39,7 @@
 
 @property (nonatomic, assign) NSUInteger numberOfPages;
 @property (nonatomic, strong) NSMutableArray *pages;
+@property (nonatomic, strong) NSMutableArray *degueuedPages;
 
 @property (nonatomic, assign) NSUInteger currentPage;
 
@@ -88,6 +89,7 @@
 - (void)_commonSetup
 {
 	self.pages = [NSMutableArray array];
+    self.degueuedPages = [NSMutableArray array];
 	self.visibleControllers = [NSMutableArray array];
 	self.pagingEnabled = YES;
 	
@@ -474,6 +476,10 @@
 	}];
 	
 	for(NSNumber *removedIndex in removedIndexes) {
+        UIViewController *vc = [self viewControllerForPageAtIndex:removedIndex.unsignedIntegerValue];
+        if (vc != nil) {
+            [self.degueuedPages addObject: vc];
+        }
 		[self.pages replaceObjectAtIndex:removedIndex.unsignedIntegerValue withObject:[NSNull null]];
 	}
 	
@@ -490,6 +496,18 @@
 	}
 	
 	[self _updateFramesAndTriggerAppearanceCallbacks];
+}
+
+- (UIViewController * __nullable)dequeuedViewController {
+    
+    if (self.degueuedPages.count <= 0) {
+        return nil;
+    }
+    
+    UIViewController *dequedVc = [self.degueuedPages objectAtIndex:0];
+    [self.degueuedPages removeObjectAtIndex:0];
+    
+    return dequedVc;
 }
 
 #pragma mark Appearance callbacks and framesetting
@@ -1061,6 +1079,8 @@
 			[oldViewController beginAppearanceTransition:NO animated:animated];
 		}
 		
+        [self.degueuedPages addObject: oldViewController];
+        
 		[self.pages replaceObjectAtIndex:pageIndex withObject:[NSNull null]];
 		UIViewController *newViewController = [self _createAndInsertNewPageAtIndex:pageIndex];
         
