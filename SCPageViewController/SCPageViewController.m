@@ -157,10 +157,11 @@
 
 #pragma mark - Public Methods
 
-- (void)setLayouter:(id<SCPageLayouterProtocol>)layouter
+
+- (void)setLayouter:(id<SCPageLayouterProtocol> _Nonnull)layouter
 	andFocusOnIndex:(NSUInteger)pageIndex
 		   animated:(BOOL)animated
-		 completion:(void(^)())completion
+		 completion:(void(^ _Nullable)())completion
 {
 	[self setLayouter:layouter animated:animated completion:^{
 		if(completion) {
@@ -179,9 +180,9 @@
 	}
 }
 
-- (void)setLayouter:(id<SCPageLayouterProtocol>)layouter
+- (void)setLayouter:(id<SCPageLayouterProtocol> _Nonnull)layouter
 		   animated:(BOOL)animated
-		 completion:(void (^)())completion
+		 completion:(void (^ _Nullable)())completion
 {
 	self.previousLayouter = self.layouter;
 	self.layouter = layouter;
@@ -1067,7 +1068,7 @@
 
 #pragma mark - Private - Incremental Updates
 
-- (void)reloadPagesAtIndexes:(NSIndexSet *)indexes animated:(BOOL)animated completion:(void(^)())completion
+- (void)reloadPagesAtIndexes:(NSIndexSet * _Nonnull)indexes animated:(BOOL)animated completion:(void(^ _Nullable)())completion
 {
 	NSMutableArray *removedViewControllers = [NSMutableArray array];
 	
@@ -1124,7 +1125,7 @@
 	});
 }
 
-- (void)insertPagesAtIndexes:(NSIndexSet *)indexes animated:(BOOL)animated completion:(void(^)())completion
+- (void)insertPagesAtIndexes:(NSIndexSet * _Nonnull)indexes animated:(BOOL)animated completion:(void(^ _Nullable)())completion
 {
 	NSInteger oldNumberOfPages = self.numberOfPages;
 	self.numberOfPages = [self.dataSource numberOfPagesInPageViewController:self];
@@ -1233,7 +1234,7 @@
 	});
 }
 
-- (void)deletePagesAtIndexes:(NSIndexSet *)indexes animated:(BOOL)animated completion:(void(^)())completion
+- (void)deletePagesAtIndexes:(NSIndexSet * _Nonnull)indexes animated:(BOOL)animated completion:(void(^ _Nullable)())completion
 {
 	NSInteger oldNumberOfPages = self.numberOfPages;
 	self.numberOfPages = [self.dataSource numberOfPagesInPageViewController:self];
@@ -1339,7 +1340,7 @@
 	});
 }
 
-- (void)movePageAtIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex animated:(BOOL)animated completion:(void(^)())completion
+- (void)movePageAtIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex animated:(BOOL)animated completion:(void(^ _Nullable)())completion
 {
 	NSAssert(fromIndex < self.numberOfPages, @"Index out of bounds");
 	NSAssert(toIndex < self.numberOfPages, @"Index out of bounds");

@@ -119,19 +119,19 @@
 
 
 /** Currently used layouter */
-@property (nonatomic, readonly) id<SCPageLayouterProtocol> layouter;
+@property (nonatomic, readonly) id<SCPageLayouterProtocol> _Nullable layouter;
 
 
 /** The page view controller's data source */
-@property (nonatomic, weak) id<SCPageViewControllerDataSource> dataSource;
+@property (nonatomic, weak) id<SCPageViewControllerDataSource> _Nullable dataSource;
 
 
 /** The page view controller's delegate */
-@property (nonatomic, weak) id<SCPageViewControllerDelegate> delegate;
+@property (nonatomic, weak) id<SCPageViewControllerDelegate> _Nullable delegate;
 
 
 /** The internal scroll view */
-@property (nonatomic, strong, readonly) SCScrollView *scrollView;
+@property (nonatomic, strong, readonly) SCScrollView * _Nonnull scrollView;
 
 
 /** The current page in the page view controller */
@@ -147,11 +147,11 @@
 
 
 /** An array of currently loaded view controllers in the page view controller */
-@property (nonatomic, readonly) NSArray *loadedViewControllers;
+@property (nonatomic, readonly) NSArray<UIViewController*> * _Nonnull loadedViewControllers;
 
 
 /** An array of currently visible view controllers in the page view controller */
-@property (nonatomic, readonly) NSArray *visibleViewControllers;
+@property (nonatomic, readonly) NSArray<UIViewController*> * _Nonnull visibleViewControllers;
 
 
 /** A Boolean value that determines whether paging is enabled for the pageController's
@@ -184,7 +184,7 @@
  *
  * Default value is set to SCEasingFunctionTypeSineEaseInOut
  */
-@property (nonatomic, strong) id<SCEasingFunctionProtocol> easingFunction;
+@property (nonatomic, strong) id<SCEasingFunctionProtocol> _Nonnull easingFunction;
 
 
 /** Animation duration used when navigating beteen pages
